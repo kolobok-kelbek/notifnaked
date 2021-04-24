@@ -21,7 +21,8 @@ icon_high_level=$BATNOT_ICONS_PATH/high-level.svg
 
 while [ 1 = 1 ]
 do
-    percentage=$(upower -i $(upower -e | grep 'BAT') | grep -E "percentage" | grep -Eo "[0-9]{1,4}")
+    battery_info=upower -i $(upower -e | grep 'BAT')
+    percentage=$($battery_info | grep -E "percentage" | grep -Eo "[0-9]{1,4}")
 
     if [ $percentage -lt $prev_percentage ]; then
         if [ $percentage -le 5 ] && [ $die -le 0 ]; then
